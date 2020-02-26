@@ -1,18 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module'
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './app.component'
+import { AreaComponent } from './area/area.component'
+import { CpanelComponent } from './cpanel/cpanel.component'
+
+import { DraggableDirective } from './shared/directives/draggable.directive'
+import { DroppableDirective } from './shared/directives/droppable.directive'
+
+import { GroupingService } from './shared/services/grouping.service'
+import { SVGService } from './shared/services/svgservice.service'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AreaComponent,
+    CpanelComponent,
+    DraggableDirective,
+    DroppableDirective
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule
   ],
-  providers: [],
+  providers: [SVGService, GroupingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

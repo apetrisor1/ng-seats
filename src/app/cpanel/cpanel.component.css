@@ -1,0 +1,11 @@
+.wrapper {
+}
+
+.adjust {
+    padding: 0px 50px;
+    font-size: 30px;
+}
+
+.adjust:hover {
+    cursor: pointer;
+}

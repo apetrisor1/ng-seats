@@ -1,0 +1,29 @@
+.svg-container {
+  background-color: #CCC;
+  border: 3px dashed #000;
+  margin-top: 10px;
+  height: 30em;
+  width: 50em;
+}
+
+.seating {
+  padding: 0px 10px;
+  border: 3px dashed #000;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-grow: 2;
+  justify-content: space-between;
+}
+
+.seat:hover {
+  cursor: move;
+}
+
+.seat {
+  background-color: transparent;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+}

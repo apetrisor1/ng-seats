@@ -1,0 +1,21 @@
+<div class='seating' appDroppable>
+  <ul id='grouping'>
+    <li *ngFor='let id of circleIds'>
+      <div appDraggable class='seat'>
+        <div><p> {{ circleIds.indexOf(id) + 1 }}</p></div>
+        <svg [attr.height]="svgHeight" [attr.width]="svgWidth">
+            <circle id={{id}} cx="12.5" cy="20" r="7.5" [attr.fill]="svgFill"/>
+        </svg>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Seat configuration drop area -->
+<div class="svg-container" appDroppable>
+  <svg id="dropzone" height="100%" width="100%">
+  </svg>
+</div>
+
+
+
