@@ -20,10 +20,15 @@
 }
 
 .seat {
+  max-width: 150px;
+  border: 1px solid blue;
   background-color: transparent;
 }
 
 ul {
   list-style-type: none;
   display: flex;
+}
+
+.small-keeper {
 }
