@@ -1,10 +1,6 @@
 import { Directive, ElementRef, HostListener } from '@angular/core'
 import { MULTI, SINGLE } from '../CONSTANTS'
-/*
 
-CLEAN UP
-
-*/
 @Directive({
   selector: '[appDraggable]'
 })

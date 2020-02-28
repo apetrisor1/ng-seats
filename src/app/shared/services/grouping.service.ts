@@ -8,10 +8,12 @@ about the selected grouping of draggable seats. */
 })
 export class GroupingService {
   columnAddedEvent: EventEmitter<any> = new EventEmitter<any>()
+  configurationChangedEvent: EventEmitter<any> = new EventEmitter<any>()
   rows; columns
 
   constructor() {
-    this.columns = this.rows = 1
+    this.columns = 1
+    this.rows = 1
   }
 
   getCoords = () => ({ rows: this.rows, columns: this.columns })
@@ -21,9 +23,9 @@ export class GroupingService {
     this.columnAddedEvent.emit(this.columns)
   }
 
-  // unused
-  setCoords = (rows: number, columns: number) => {
+   setCoords = (rows: number, columns: number) => {
     this.rows = rows
     this.columns = columns
+    this.configurationChangedEvent.emit({ rows: this.rows, columns: this.columns })
   }
 }

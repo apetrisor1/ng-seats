@@ -1,8 +1,11 @@
+<!-- RE-ARANGE WITH CARE ! -->
 <div class='seating' appDroppable>
   <div id='dragon' appDraggable class='seat'>
-    <svg class='small-keeper' [attr.height]='svgHeight' [attr.width]='svgWidth' *ngFor='let id of circleIds'>
-      <circle id={{id}} cx='12.5' cy='20' r='7.5' [attr.fill]='svgFill'/>
-    </svg>
+    <p class='row' *ngFor='let row of circleRows'>
+      <svg class='small-keeper' [attr.height]='svgHeight' [attr.width]='svgWidth' *ngFor='let column of circleColumns'>
+        <circle id=seat-{{row}}-{{column}} cx='12.5' cy='20' r='7.5' [attr.fill]='svgFill'/>
+      </svg>
+    </p>
   </div>
 </div>
 
@@ -11,6 +14,3 @@
   <svg id='dropzone' height='100%' width='100%'>
   </svg>
 </div>
-
-
-

@@ -8,20 +8,32 @@ import { SEAT } from '../shared/styles/svg.styles'
   styleUrls: ['./area.component.css', '../app.component.css']
 })
 export class AreaComponent implements OnInit {
-  circleIds   = new Array()
-  svgHeight   = SEAT.svgHeight
-  svgWidth    = SEAT.svgWidth
-  svgFill     = SEAT.svgFill
+  circleColumns   = new Array()
+  circleRows      = new Array()
+  svgHeight       = SEAT.svgHeight
+  svgWidth        = SEAT.svgWidth
+  svgFill         = SEAT.svgFill
 
   constructor(private grouping: GroupingService) {
-    this.grouping.columnAddedEvent.subscribe((columns) => {
-      this.circleIds.push(`row-1-column-${columns}`)
+    const configuration = this.grouping.getCoords()
+    this.setCoords(configuration)
+
+    this.grouping.configurationChangedEvent.subscribe((newConfiguration) => {
+      this.circleColumns = []
+      this.circleRows = []
+      this.setCoords(newConfiguration)
     })
   }
 
-  ngOnInit(): void {
-    const { columns } = this.grouping.getCoords()
-    this.circleIds.push(`row-1-column-${columns}`)
-  }
+  ngOnInit(): void {}
 
+  private setCoords = (configuration) => {
+    const { rows, columns } = configuration
+    for (let i = 1; i <= rows; i++) {
+      this.circleRows.push(i)
+    }
+    for (let j = 1; j <= columns; j++) {
+      this.circleColumns.push(j)
+    }
+  }
 }

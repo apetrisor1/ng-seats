@@ -11,6 +11,7 @@ import { DroppableDirective } from './shared/directives/droppable.directive'
 
 import { GroupingService } from './shared/services/grouping.service'
 import { SVGService } from './shared/services/svgservice.service'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { SVGService } from './shared/services/svgservice.service'
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [SVGService, GroupingService],
   bootstrap: [AppComponent]

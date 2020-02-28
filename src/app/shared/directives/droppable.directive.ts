@@ -1,12 +1,7 @@
 import { Directive, HostListener } from '@angular/core'
 import { SVGService } from '../services/svgservice.service'
+import { GroupingService } from '../services/grouping.service'
 import { MULTI, SINGLE } from '../CONSTANTS'
-
-/*
-
-CLEAN UP
-
-*/
 
 @Directive({
   selector: '[appDroppable]'
@@ -14,7 +9,7 @@ CLEAN UP
 export class DroppableDirective {
   private draggingElement: any
 
-  constructor(private svgService: SVGService) {
+  constructor(private svgService: SVGService, private grouping: GroupingService) {
   }
 
   @HostListener('drop', ['$event'])
@@ -29,8 +24,9 @@ export class DroppableDirective {
       case MULTI:
         const [divId, ...multiData] = data.split('_')
         this.multiDrop(divId, multiData, event)
+        break
     }
-  }
+}
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event): void {
