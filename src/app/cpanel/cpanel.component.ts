@@ -10,26 +10,29 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
   styleUrls: ['./cpanel.component.css', '../app.component.css']
 })
 export class CpanelComponent implements OnInit {
+  sector
+
   constructor(private grouping: GroupingService, private modalService: NgbModal, private formBuilder: FormBuilder) {
+    this.sector = this.grouping.getCoords().sector
     this.createForm()
-   }
+  }
   myForm: FormGroup
 
   ngOnInit(): void {}
 
   open(content) {
-    this.grouping.setCoords(0, 0)
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+    this.grouping.setCoords(this.sector, 0, 0)
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true, size: 'sm' })
   }
 
   private createForm() {
-    this.myForm = this.formBuilder.group({ rows: 1, columns: 1 })
+    this.myForm = this.formBuilder.group({ sector: this.sector, rows: 1, columns: 1  })
   }
 
   submitForm(filledOutForm) {
     this.myForm = filledOutForm
-    const { rows, columns } = filledOutForm?.value
-    this.grouping.setCoords(rows, columns)
+    const { sector, rows, columns } = filledOutForm?.value
+    this.grouping.setCoords(sector, rows, columns)
     this.modalService.dismissAll()
   }
 }

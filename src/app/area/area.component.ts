@@ -8,6 +8,7 @@ import { SEAT } from '../shared/styles/svg.styles'
   styleUrls: ['./area.component.css', '../app.component.css']
 })
 export class AreaComponent implements OnInit {
+  sector
   circleColumns   = new Array()
   circleRows      = new Array()
   svgHeight       = SEAT.svgHeight
@@ -28,7 +29,8 @@ export class AreaComponent implements OnInit {
   ngOnInit(): void {}
 
   private setCoords = (configuration) => {
-    const { rows, columns } = configuration
+    const { sector, rows, columns } = configuration
+    this.sector = sector
     for (let i = 1; i <= rows; i++) {
       this.circleRows.push(i)
     }

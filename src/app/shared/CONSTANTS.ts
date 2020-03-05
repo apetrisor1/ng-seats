@@ -1,7 +1,1 @@
-const MULTI  = 'MULTI'
-const SINGLE = 'SINGLE'
-
-export {
-  MULTI,
-  SINGLE
-}
+export const DEFAULT_SECTOR = 'A'

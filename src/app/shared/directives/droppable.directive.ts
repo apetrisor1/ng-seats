@@ -1,7 +1,6 @@
 import { Directive, HostListener } from '@angular/core'
 import { SVGService } from '../services/svgservice.service'
 import { GroupingService } from '../services/grouping.service'
-import { MULTI, SINGLE } from '../CONSTANTS'
 
 @Directive({
   selector: '[appDroppable]'
@@ -15,24 +14,17 @@ export class DroppableDirective {
   @HostListener('drop', ['$event'])
   onDrop(event) {
     const text = event.dataTransfer.getData('text')
-    const [type, data] = text.split('|')
+    const data = [...text.split('_')]
+    const MULTI = data.length > 1
 
-    switch (type) {
-      case SINGLE:
-        this.drop(data, event)
-        break
-      case MULTI:
-        const [divId, ...multiData] = data.split('_')
-        this.multiDrop(divId, multiData, event)
-        break
-    }
+    MULTI ? this.multiDrop(data, event) : this.drop(data, event)
 }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event): void {
     if (this.draggingElement) {
       const svgPoint = this.svgService.getSVGPoint(event, this.draggingElement)
-      this.setPosition(this.draggingElement, { x: svgPoint.x, y: svgPoint.y  })
+      this.setPosition(this.draggingElement, { x: svgPoint.x, y: svgPoint.y })
     }
   }
 
@@ -67,17 +59,13 @@ export class DroppableDirective {
     droppedElement.setAttribute('draggable', true)
 
     const svgPoint = this.svgService.getSVGPoint(event, droppedElement)
-    this.setPosition(droppedElement, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff})
+    this.setPosition(droppedElement, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff })
   }
 
-  private multiDrop = (divId, multiData, event) => {
-    const div = document.getElementById(divId)
-    let divbox: any
+  private multiDrop = (multiData, event) => {
     let i: number
     let x: any
     let y: any
-
-    divbox = div?.getBoundingClientRect()
 
     const len = multiData.length
     const original = document.getElementById(multiData[0])
@@ -86,7 +74,8 @@ export class DroppableDirective {
     y = originalBoundingBox?.y
     this.drop(original?.id, event)
 
-    for (i = 1; i < len; i++) {
+    /* ignore last (see draggable.directive) */
+    for (i = 1; i < len - 1; i ++) {
       const id = multiData[i]
       const follower = document.getElementById(id)
       if (follower) {

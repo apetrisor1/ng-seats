@@ -1,6 +1,10 @@
 import { Directive, ElementRef, HostListener } from '@angular/core'
-import { MULTI, SINGLE } from '../CONSTANTS'
 
+/*
+  IMPORTANT: event.dataTransfer.setData('text', ...) uses format
+  One seat: <circle id>
+  Multiple: <circle1 id>_...<circleN id>_undefined
+*/
 @Directive({
   selector: '[appDraggable]'
 })
@@ -27,16 +31,16 @@ export class DraggableDirective {
   }
 
   private handleMultiDrag({ target, dataTransfer }): void {
-    let text = `${MULTI}|${target.id}`
+    let text = ``
     const circles = target.getElementsByTagName('circle')
     for (const circle of circles) {
-      text += `_${circle.id}`
+      text += `${circle.id}_`
     }
     dataTransfer.setData('text', text)
   }
 
   private handleSingleDrag({ target, dataTransfer }): void {
     const elementToBeDragged = target.getElementsByTagName('circle')[0]
-    dataTransfer.setData('text', `${SINGLE}|${elementToBeDragged.id}`)
+    dataTransfer.setData('text', elementToBeDragged.id)
   }
 }

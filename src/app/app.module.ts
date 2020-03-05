@@ -27,7 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [SVGService, GroupingService],
+  providers: [GroupingService, SVGService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
