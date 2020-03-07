@@ -31,6 +31,7 @@ export class DroppableDirective {
   @HostListener('mousedown', ['$event'])
   onMouseDown(event): void {
     if (event.target.getAttribute('draggable')) {
+      console.log({ target: event.target })
       this.draggingElement = event.target
     }
   }

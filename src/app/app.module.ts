@@ -8,6 +8,7 @@ import { CpanelComponent } from './cpanel/cpanel.component'
 
 import { DraggableDirective } from './shared/directives/draggable.directive'
 import { DroppableDirective } from './shared/directives/droppable.directive'
+import { MultiSelectDirective } from './shared/directives/multi-select.directive'
 
 import { GroupingService } from './shared/services/grouping.service'
 import { SVGService } from './shared/services/svgservice.service'
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     AreaComponent,
     CpanelComponent,
     DraggableDirective,
-    DroppableDirective
+    DroppableDirective,
+    MultiSelectDirective
   ],
   imports: [
     AppRoutingModule,
