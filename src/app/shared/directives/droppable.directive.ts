@@ -45,11 +45,6 @@ export class DroppableDirective {
     this.draggingElement = null
   }
 
-  private setPosition(element, coord: { x, y }) {
-    element.setAttribute('cx', coord.x)
-    element.setAttribute('cy', coord.y)
-  }
-
   private drop = (elementId, event, xDiff = 0, yDiff = 0) => {
     const droppedElement = document.getElementById(elementId)?.cloneNode(true) as any
     const original = document.getElementById(elementId)
@@ -64,8 +59,8 @@ export class DroppableDirective {
 
   private multiDrop = (multiData, event) => {
     let i: number
-    let x: any
-    let y: any
+    let x: number | undefined
+    let y: number | undefined
 
     const len = multiData.length
     const original = document.getElementById(multiData[0])
@@ -82,10 +77,15 @@ export class DroppableDirective {
         const boundingBox = follower?.getBoundingClientRect()
         const xF = boundingBox.x
         const yF = boundingBox.y
-        const xOffset = xF - x
-        const yOffset = yF - y
+        const xOffset = xF - (x || 0)
+        const yOffset = yF - (y || 0)
         this.drop(id, event, xOffset, yOffset)
       }
     }
+  }
+
+  private setPosition(element, coord: { x, y }) {
+    element.setAttribute('cx', coord.x)
+    element.setAttribute('cy', coord.y)
   }
 }

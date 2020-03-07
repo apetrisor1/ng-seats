@@ -3,7 +3,7 @@
   <div id='dragon' appDraggable class='seat'>
     <p class='row' *ngFor='let row of circleRows'>
       <svg class='small-keeper' [attr.height]='svgHeight' [attr.width]='svgWidth' *ngFor='let column of circleColumns'>
-        <circle id=seat-{{sector}}-{{row}}-{{column}} cx='12.5' cy='20' r='7.5' [attr.fill]='svgFill'/>
+        <circle class='circle' id={{sector}}-{{row}}-{{column}} cx='12.5' cy='20' r='7.5' [attr.fill]='svgFill'/>
       </svg>
     </p>
   </div>
