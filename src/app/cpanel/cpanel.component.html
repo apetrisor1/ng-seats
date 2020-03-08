@@ -45,5 +45,8 @@
     <p> Start dragging from the center of the top left seat</p>
     <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add seating</button>
     <button id="multi-drag" class="btn btn-lg btn-outline-primary" (click)="toggleMultiDrag()">Multi drag</button>
-    <button class="btn btn-lg btn-outline-primary" (click)="clearSelection()">Clear</button>
+    <button class="btn btn-lg btn-outline-primary" (click)="clearSelection()">Clear selection</button>
+    <div>
+      <button class="btn btn-lg btn-outline-danger" (click)="deleteSelected()">Remove selection</button>
+    </div>
 </div>

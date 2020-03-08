@@ -1,7 +1,7 @@
 import { Directive, HostListener } from '@angular/core'
 import { MultiSelectService, SVGService } from '../services'
 
-/* ini  - Used in initial drop  |  main - Used in main area drags */
+/* ini  - Used in initial movement (new seats)  |  main - Used in main area (existing seats) */
 
 @Directive({
   selector: '[appDroppable]'
@@ -15,6 +15,7 @@ export class DroppableDirective {
     this.multiSelect.multiDragEvent.subscribe(() => {
       this.stageAreaMultiDrag = !this.stageAreaMultiDrag
     })
+    this.multiSelect.selectionDeletedEvent.subscribe(() => this.multiDraggingElements = [])
   }
   // ini
   @HostListener('drop', ['$event'])
@@ -66,10 +67,8 @@ export class DroppableDirective {
     } else {
       const text = this.multiSelect.getSelection()
       if (text) {
-        const data = [...text.split('_')].slice(0, text.split('_').length - 1)
-        data.map((id) => {
-          this.multiDraggingElements.push(document.getElementById(id))
-        })
+        const data = [...text.split('_')]
+        data.map((id) => this.multiDraggingElements.push(document.getElementById(id)))
       }
     }
   }
@@ -110,8 +109,7 @@ export class DroppableDirective {
     y = originalBoundingBox?.y
     this.drop(original?.id, event)
 
-    /* ignore last (see draggable.directive) */
-    for (i = 1; i < len - 1; i ++) {
+    for (i = 1; i < len; i ++) {
       const id = multiData[i]
       const follower = document.getElementById(id)
       if (follower) {

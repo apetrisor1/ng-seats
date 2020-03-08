@@ -25,6 +25,9 @@ export class CpanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  clearSelection = () => this.multiSelect.clearSelection()
+  deleteSelected = () => this.multiSelect.deleteSelected()
+
   open(content) {
     this.grouping.setCoords(this.sector, 0, 0)
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true, size: 'sm' })
@@ -40,8 +43,6 @@ export class CpanelComponent implements OnInit {
     this.grouping.setCoords(sector, rows, columns)
     this.modalService.dismissAll()
   }
-
-  clearSelection = () => this.multiSelect.clearSelection()
 
   toggleMultiDrag = () => {
     this.multiSelect.toggleMultiDrag()

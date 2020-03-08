@@ -8,11 +8,16 @@ import { SEAT } from '../styles/svg.styles'
 export class MultiSelectDirective {
   start: number[] = []
   end: number[] = []
-  seats: any[] = [] // fix any
+  seats: any[] = []
 
   constructor(private multiSelect: MultiSelectService) {
     this.multiSelect.selectionClearedEvent.subscribe(() => {
       Array.from(document.getElementsByClassName('circle')).map(seat => seat.setAttribute('fill', SEAT.svgFill))
+      this.seats = []
+    })
+    this.multiSelect.selectionDeletedEvent.subscribe(() => {
+      const idsToDelete = [...this.multiSelect.getSelection().split('_')]
+      idsToDelete.map(id => document.getElementById(id)?.remove())
       this.seats = []
     })
   }
@@ -32,19 +37,10 @@ export class MultiSelectDirective {
     const seats = target.getElementsByClassName('circle')
     this.colourSeats(seats, this.start, this.end)
 
-    /* Seats are coloured based on mouse selection, then this.seats is emptied. Last, this.seats is filled based on color.
+    /* Seats are coloured based on mouse selection, then this.seats is emptied.
+    Last, this.seats is filled based on color in multi-select.
     This is done to avoid byzantine logic around pushing/removing from this.seats*/
-    Array.from(document.getElementsByClassName('circle')).map(seat => {
-      const fill = seat.getAttribute('fill')
-      if (fill === SEAT.svgFillSelected) {
-        this.seats.push(seat)
-      }
-    })
-    let text = ''
-    for (const seat of this.seats) {
-      text += `${seat.id}_`
-    }
-    this.multiSelect.setSelection(text)
+    this.multiSelect.refreshSelection(this.seats)
   }
 
   private colourSeats = (seats, start, end) => {
