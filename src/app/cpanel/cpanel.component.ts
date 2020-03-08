@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { GroupingService } from '../shared/services/grouping.service'
+import { GroupingService, MultiSelectService } from '../shared/services'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
@@ -12,7 +12,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 export class CpanelComponent implements OnInit {
   sector
 
-  constructor(private grouping: GroupingService, private modalService: NgbModal, private formBuilder: FormBuilder) {
+  constructor(
+    private grouping: GroupingService,
+    private modalService: NgbModal,
+    private multiSelect: MultiSelectService,
+    private formBuilder: FormBuilder
+  ) {
     this.sector = this.grouping.getCoords().sector
     this.createForm()
   }
@@ -34,5 +39,14 @@ export class CpanelComponent implements OnInit {
     const { sector, rows, columns } = filledOutForm?.value
     this.grouping.setCoords(sector, rows, columns)
     this.modalService.dismissAll()
+  }
+
+  clearSelection = () => this.multiSelect.clearSelection()
+
+  toggleMultiDrag = () => {
+    this.multiSelect.toggleMultiDrag()
+    document.getElementById('multi-drag')?.getAttribute('class')?.includes('active') ?
+    document.getElementById('multi-drag')?.setAttribute('class', 'btn btn-lg btn-outline-primary') :
+    document.getElementById('multi-drag')?.setAttribute('class', 'btn btn-lg btn-outline-primary active')
   }
 }

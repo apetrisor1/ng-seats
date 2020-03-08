@@ -11,6 +11,7 @@ import { DroppableDirective } from './shared/directives/droppable.directive'
 import { MultiSelectDirective } from './shared/directives/multi-select.directive'
 
 import { GroupingService } from './shared/services/grouping.service'
+import { MultiSelectService } from './shared/services/multi-select.service'
 import { SVGService } from './shared/services/svgservice.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
@@ -29,7 +30,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [GroupingService, SVGService],
+  providers: [
+    GroupingService,
+    MultiSelectService,
+    SVGService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

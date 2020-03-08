@@ -15,6 +15,8 @@ export class AreaComponent implements OnInit {
   svgWidth        = SEAT.svgWidth
   svgFill         = SEAT.svgFill
 
+  now = new Date().getTime()
+
   constructor(private grouping: GroupingService) {
     const configuration = this.grouping.getCoords()
     this.setCoords(configuration)
@@ -29,6 +31,7 @@ export class AreaComponent implements OnInit {
   ngOnInit(): void {}
 
   private setCoords = (configuration) => {
+    this.now = new Date().getTime()
     const { sector, rows, columns } = configuration
     this.sector = sector
     for (let i = 1; i <= rows; i++) {

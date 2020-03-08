@@ -1,4 +1,5 @@
 import { Directive, HostListener } from '@angular/core'
+import { MultiSelectService } from '../services'
 import { SEAT } from '../styles/svg.styles'
 
 @Directive({
@@ -9,7 +10,12 @@ export class MultiSelectDirective {
   end: number[] = []
   seats: any[] = [] // fix any
 
-  constructor() { }
+  constructor(private multiSelect: MultiSelectService) {
+    this.multiSelect.selectionClearedEvent.subscribe(() => {
+      Array.from(document.getElementsByClassName('circle')).map(seat => seat.setAttribute('fill', SEAT.svgFill))
+      this.seats = []
+    })
+  }
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event): void {
@@ -24,10 +30,24 @@ export class MultiSelectDirective {
     this.end = []
     this.end.push(x, y)
     const seats = target.getElementsByClassName('circle')
-    this.selectSeats(seats, this.start, this.end)
+    this.colourSeats(seats, this.start, this.end)
+
+    /* Seats are coloured based on mouse selection, then this.seats is emptied. Last, this.seats is filled based on color.
+    This is done to avoid byzantine logic around pushing/removing from this.seats*/
+    Array.from(document.getElementsByClassName('circle')).map(seat => {
+      const fill = seat.getAttribute('fill')
+      if (fill === SEAT.svgFillSelected) {
+        this.seats.push(seat)
+      }
+    })
+    let text = ''
+    for (const seat of this.seats) {
+      text += `${seat.id}_`
+    }
+    this.multiSelect.setSelection(text)
   }
 
-  private selectSeats = (seats, start, end) => {
+  private colourSeats = (seats, start, end) => {
     this.seats = []
     const [startX, startY] = start
     const [endX, endY] = end
@@ -49,7 +69,12 @@ export class MultiSelectDirective {
         this.seats.push(seat)
       }
     }
-
-    this.seats.map(seat => seat.setAttribute('fill', SEAT.svgFillSelected))
+    if (this.seats.length) {
+      // Get reverse fill from first element to avoid streetlight behaviour
+      const fill = this.seats[0].getAttribute('fill')
+      const reverse = fill === SEAT.svgFill ? SEAT.svgFillSelected : SEAT.svgFill
+      this.seats.map(seat => seat.setAttribute('fill', reverse))
+      this.seats = []
+    }
   }
 }

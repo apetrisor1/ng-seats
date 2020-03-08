@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core'
 import { DEFAULT_SECTOR } from '../CONSTANTS'
 
 /* Provides information transfer between admin panel and area components
-about the selected grouping of draggable seats. */
+about the new grouping of draggable seats. */
 
 @Injectable({
   providedIn: 'root'
