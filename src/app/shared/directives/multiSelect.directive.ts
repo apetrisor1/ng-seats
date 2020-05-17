@@ -2,6 +2,17 @@ import { Directive, HostListener } from '@angular/core'
 import { MultiSelectService } from '../services'
 import { SEAT } from '../styles/svg.styles'
 
+/* Directive applied to main stage area.
+Allows selecting one or more seats by doing a drag movement
+with the mouse, while not in multi-drag mode.
+
+Selection is used by:
+- DroppableDirective, when dragging multiple seats in main area.
+- This directive, to remove selected seats.
+
+multiSelect service handles data transfer.
+*/
+
 @Directive({
   selector: '[appMultiSelect]'
 })
@@ -24,7 +35,7 @@ export class MultiSelectDirective {
 
   @HostListener('mousedown', ['$event'])
   onMouseDown(event): void {
-    const { offsetX: x, offsetY: y, target } = event
+    const { offsetX: x, offsetY: y } = event
     this.start = []
     this.start.push(x, y)
   }
@@ -37,10 +48,10 @@ export class MultiSelectDirective {
     const seats = target.getElementsByClassName('circle')
     this.colourSeats(seats, this.start, this.end)
 
-    /* Seats are coloured based on mouse selection, then this.seats is emptied.
-    Last, this.seats is filled based on color in multi-select.
-    This is done to avoid byzantine logic around pushing/removing from this.seats*/
-    this.multiSelect.refreshSelection(this.seats)
+    /* Seats are coloured based on mouse selection, then this.seats is emptied, in this.colourSeats().
+    Last, this.seats is filled again based on color in multiSelect.selectColouredSeats().
+    This is done to avoid byzantine logic when doing repeated selections, around pushing/removing elements in this.seats. */
+    this.multiSelect.selectColouredSeats(this.seats)
   }
 
   private colourSeats = (seats, start, end) => {
@@ -50,18 +61,12 @@ export class MultiSelectDirective {
     for (const seat of seats) {
       const seatX = seat.cx.baseVal.value
       const seatY = seat.cy.baseVal.value
-
       const leftRightTopBottom = (seatX >= startX && seatY >= startY && seatX <= endX && seatY <= endY)
       const leftRightBottomTop = (seatX >= startX && seatY <= startY && seatX <= endX && seatY >= endY)
       const rightLeftTopBottom = (seatX <= startX && seatY >= startY && seatX >= endX && seatY <= endY)
       const rightLeftBottomTop = (seatX <= startX && seatY <= startY && seatX >= endX && seatY >= endY)
 
-      if (
-        leftRightTopBottom ||
-        leftRightBottomTop ||
-        rightLeftTopBottom ||
-        rightLeftBottomTop
-      ) {
+      if (leftRightTopBottom || leftRightBottomTop || rightLeftTopBottom || rightLeftBottomTop) {
         this.seats.push(seat)
       }
     }

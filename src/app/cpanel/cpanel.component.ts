@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { GroupingService, MultiSelectService } from '../shared/services'
+import { GroupingService, MultiSelectService, RotateService } from '../shared/services'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
@@ -10,12 +10,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
   styleUrls: ['./cpanel.component.css', '../app.component.css']
 })
 export class CpanelComponent implements OnInit {
+  degreesInput
   sector
 
   constructor(
     private grouping: GroupingService,
     private modalService: NgbModal,
     private multiSelect: MultiSelectService,
+    private rotateService: RotateService,
     private formBuilder: FormBuilder
   ) {
     this.sector = this.grouping.getCoords().sector
@@ -35,6 +37,14 @@ export class CpanelComponent implements OnInit {
 
   private createForm() {
     this.myForm = this.formBuilder.group({ sector: this.sector, rows: 1, columns: 1  })
+  }
+
+  rotate(clockwise: boolean) {
+    if (!this.degreesInput) {
+      this.degreesInput = document.getElementById('input-degrees')
+    }
+    const degrees = parseInt(this.degreesInput.value, 10)
+    this.rotateService.rotate(degrees, clockwise)
   }
 
   submitForm(filledOutForm) {

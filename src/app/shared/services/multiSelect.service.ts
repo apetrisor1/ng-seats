@@ -1,10 +1,17 @@
 import { EventEmitter, Injectable } from '@angular/core'
 import { SEAT } from '../styles/svg.styles'
 
-/*
-Provides information transfer between admin panel and area component:
+/* Provides information transfer:
+
+C-Panel Component -> MultiSelect Directive
 - user cleared selection
+- user deleted selection
+
+C-Panel Component -> Droppable Directive:
+- user deleted selection
 - whether the user can select multiple seats by mouse-drag
+
+MultiSelect Directive -> Droppable Directive:
 - current selection of seats to be dragged. (acts as the "text" property on event.dataTransfer in draggable.directive.ts)
 */
 
@@ -12,11 +19,10 @@ Provides information transfer between admin panel and area component:
   providedIn: 'root'
 })
 export class MultiSelectService {
+  currentSelectionString: string
+  multiDragEvent: EventEmitter<any> = new EventEmitter<any>()
   selectionClearedEvent: EventEmitter<any> = new EventEmitter<any>()
   selectionDeletedEvent: EventEmitter<any> = new EventEmitter<any>()
-  multiDragEvent: EventEmitter<any> = new EventEmitter<any>()
-
-  currentSelectionString: string
 
   constructor() { }
 
@@ -28,11 +34,9 @@ export class MultiSelectService {
     this.selectionDeletedEvent.emit()
     this.currentSelectionString = ''
   }
-  setSelection = (text) => this.currentSelectionString = text
   getSelection = () => this.currentSelectionString
-  toggleMultiDrag = () => this.multiDragEvent.emit()
-
-  refreshSelection = (seats) => {
+  setSelection = (text) => this.currentSelectionString = text
+  selectColouredSeats = (seats) => {
     Array.from(document.getElementsByClassName('circle')).map(seat => {
       const fill = seat.getAttribute('fill')
       if (fill === SEAT.svgFillSelected) {
@@ -46,4 +50,5 @@ export class MultiSelectService {
     text = text.slice(0, text.length - 1)
     this.setSelection(text)
   }
+  toggleMultiDrag = () => this.multiDragEvent.emit()
 }

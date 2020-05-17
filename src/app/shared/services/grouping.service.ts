@@ -1,8 +1,11 @@
 import { EventEmitter, Injectable } from '@angular/core'
 import { DEFAULT_SECTOR } from '../CONSTANTS'
 
-/* Provides information transfer between admin panel and area components
-about the new grouping of draggable seats. */
+/*Provides information transfer:
+
+  C-Panel Component -> Area Component
+- The new seat group added by clicking 'Add seating'
+*/
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +23,8 @@ export class GroupingService {
   getCoords = () => ({ sector: this.sector, rows: this.rows, columns: this.columns })
   setCoords = (sector: string, rows: number, columns: number) => {
     this.sector = sector
-    this.rows = rows
-    this.columns = columns
+    this.rows = Math.min(rows, 20)
+    this.columns = Math.min(columns, 20)
     this.configurationChangedEvent.emit({ sector: this.sector, rows: this.rows, columns: this.columns })
   }
 }

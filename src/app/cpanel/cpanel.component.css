@@ -5,3 +5,13 @@ p {
 .btn {
     margin: 5px 5px;
 }
+
+.arrow {
+    font-size: 2em;
+    padding: 0 1em 0 1em;
+    cursor: pointer;
+}
+
+.rotate {
+    margin-top: 3em;
+}
