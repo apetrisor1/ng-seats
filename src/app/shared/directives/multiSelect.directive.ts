@@ -7,7 +7,7 @@ Allows selecting one or more seats by doing a drag movement
 with the mouse, while not in multi-drag mode.
 
 Selection is used by:
-- DroppableDirective, when dragging multiple seats in main area.
+- MovementDirective, when dragging multiple seats in main area.
 - This directive, to remove selected seats.
 
 multiSelect service handles data transfer.

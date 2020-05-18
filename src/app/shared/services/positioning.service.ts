@@ -31,7 +31,7 @@ export class PositioningService {
 
   getAngleInRadians = (angleInDegrees: number) => ((angleInDegrees * Math.PI) / 180)
 
-  getPivotPointOfMatrix = (seats) => {
+  getMatrixPivotPoint = (seats) => {
     let minX: any = seats[0].cx.baseVal.value
     let maxX: any = minX
     let minY: any = seats[0].cy.baseVal.value

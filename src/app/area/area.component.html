@@ -1,6 +1,6 @@
 <!-- RE-ARANGE WITH CARE ! -->
-<div class='seating' appDroppable>
-  <div id='dragon' appDraggable class='seat'>
+<div class='seating' appMovement>
+  <div id='dragon' appInitiateMovement class='seat'>
     <p class='row' *ngFor='let row of circleRows'>
       <svg class='small-keeper' [attr.height]='svgHeight' [attr.width]='svgWidth' *ngFor='let column of circleColumns'>
         <circle class='circle' id={{sector}}-{{row}}-{{column}}-{{now}} cx='12.5' cy='20' r='7.5' [attr.fill]='svgFill'/>
@@ -10,7 +10,7 @@
 </div>
 
 <!-- Seat configuration drop area -->
-<div class='svg-container' appDroppable appMultiSelect appRotate>
+<div class='svg-container' appMovement appMultiSelect appRotate>
   <svg id='dropzone' height='100%' width='100%'>
   </svg>
 </div>

@@ -1,11 +1,11 @@
-import { DraggableDirective } from './draggable.directive'
-import { DroppableDirective } from './droppable.directive'
+import { InitiateMovementDirective } from './initiateMovement.directive'
+import { MovementDirective } from './movement.directive'
 import { MultiSelectDirective } from './multiSelect.directive'
 import { RotateDirective } from './rotate.directive'
 
 export {
-    DraggableDirective,
-    DroppableDirective,
+    InitiateMovementDirective,
+    MovementDirective,
     MultiSelectDirective,
     RotateDirective
 }

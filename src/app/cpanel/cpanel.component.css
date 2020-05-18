@@ -1,17 +1,22 @@
 p {
-    padding: 30px 0px;
+  padding: 30px 0px;
 }
 
 .btn {
-    margin: 5px 5px;
+  margin: 5px 5px;
 }
 
 .arrow {
-    font-size: 2em;
-    padding: 0 1em 0 1em;
-    cursor: pointer;
+  font-size: 2em;
+  padding: 0 1em 0 1em;
+  cursor: pointer;
 }
 
 .rotate {
-    margin-top: 3em;
+  margin-top: 3em;
+}
+
+.wrapper {
+  position: relative;
+  top: -10em;
 }

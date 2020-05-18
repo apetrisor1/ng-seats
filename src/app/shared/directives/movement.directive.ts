@@ -4,9 +4,9 @@ import { MultiSelectService, SVGService } from '../services'
 /* ini  - Used in initial movement (new seats)  |  main - Used in main area (existing seats) */
 
 @Directive({
-  selector: '[appDroppable]'
+  selector: '[appMovement]'
 })
-export class DroppableDirective {
+export class MovementDirective {
   private draggingElement: any
   private multiDraggingElements: any[] = []
   private stageAreaMultiDrag = false

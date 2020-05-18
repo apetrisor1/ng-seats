@@ -6,9 +6,9 @@ import { Directive, ElementRef, HostListener } from '@angular/core'
   Multiple: <circle1 id>_...<circleN id>
 */
 @Directive({
-  selector: '[appDraggable]'
+  selector: '[appInitiateMovement]'
 })
-export class DraggableDirective {
+export class InitiateMovementDirective {
   constructor(private el: ElementRef) {
     this.el.nativeElement.setAttribute('draggable', true)
   }

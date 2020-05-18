@@ -7,7 +7,7 @@ import { AppComponent } from './app.component'
 import { AreaComponent } from './area/area.component'
 import { CpanelComponent } from './cpanel/cpanel.component'
 
-import { DraggableDirective, DroppableDirective, MultiSelectDirective, RotateDirective } from './shared/directives'
+import { InitiateMovementDirective, MovementDirective, MultiSelectDirective, RotateDirective } from './shared/directives'
 import { GroupingService, SVGService, MultiSelectService, PositioningService, RotateService } from './shared/services'
 
 @NgModule({
@@ -15,8 +15,8 @@ import { GroupingService, SVGService, MultiSelectService, PositioningService, Ro
     AppComponent,
     AreaComponent,
     CpanelComponent,
-    DraggableDirective,
-    DroppableDirective,
+    InitiateMovementDirective,
+    MovementDirective,
     RotateDirective,
     MultiSelectDirective
   ],

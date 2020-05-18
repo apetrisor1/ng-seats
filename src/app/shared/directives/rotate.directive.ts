@@ -32,7 +32,7 @@ export class RotateDirective {
   }
 
   private createInitialCoordsMatrix = (seats) => {
-    this.pivotPoint = this.positioningService.getPivotPointOfMatrix(seats)
+    this.pivotPoint = this.positioningService.getMatrixPivotPoint(seats)
     seats.forEach(seat => {
         const { cx, cy } = seat
         this.relativeSeatCoordsMatrixBeforeRotation.rows[0].push(cx.baseVal.value - this.pivotPoint.x)
