@@ -8,8 +8,7 @@ Droppable Directive
 
 - Sets a new position for a SVG DOM element (a seat)
 - Gives pivot point of matrix (to rotate around)
-- Obtains the rotational transformation matrix for a given angle,
-used to find rotated seat coordinates.
+- Obtains the rotational transformation matrix for a given angle
 
 */
 
@@ -44,7 +43,7 @@ export class PositioningService {
         if (x < minX) { minX = x }
         if (x > maxX) { maxX = x }
         if (y < minY) { minY = y }
-        if (x > maxY) { maxY = y }
+        if (y > maxY) { maxY = y }
     }
     const pivotX = (minX + maxX) / 2
     const pivotY = (minY + maxY) / 2

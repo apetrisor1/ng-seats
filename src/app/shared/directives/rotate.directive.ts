@@ -10,7 +10,7 @@ a) all seats are mapped with coordinates relative to the pivot. (middle of group
     [-15, -15], [15, -15]
   ]
 b) Rotational transformation matrix is obtained for given angle
-c) Rotated coordinates matrix = a * b
+c) Rotated coordinates matrix = a) * b)
 d) Set new coordinates of points, obtained as pivot point coordinates + new relative coordinates */
 
 @Directive({
