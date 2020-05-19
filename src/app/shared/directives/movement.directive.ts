@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core'
-import { MultiSelectService, SVGService } from '../services'
+import { MultiSelectService, PositioningService, SVGService } from '../services'
 
 /* ini  - Used in initial movement (new seats)  |  main - Used in main area (existing seats) */
 
@@ -11,7 +11,11 @@ export class MovementDirective {
   private multiDraggingElements: any[] = []
   private stageAreaMultiDrag = false
 
-  constructor(private svgService: SVGService, private multiSelect: MultiSelectService) {
+  constructor(
+    private positioningService: PositioningService,
+    private svgService: SVGService,
+    private multiSelect: MultiSelectService
+    ) {
     this.multiSelect.multiDragEvent.subscribe(() => {
       this.stageAreaMultiDrag = !this.stageAreaMultiDrag
     })
@@ -54,7 +58,7 @@ export class MovementDirective {
 
   private moveSVGElement = (event, element, xDiff = 0, yDiff = 0) => {
     const svgPoint = this.svgService.getSVGPoint(event, element)
-    this.setPosition(element, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff})
+    this.positioningService.setPosition(element, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff})
   }
 
   @HostListener('mousedown', ['$event'])
@@ -95,7 +99,7 @@ export class MovementDirective {
     droppedElement.setAttribute('draggable', true)
 
     const svgPoint = this.svgService.getSVGPoint(event, droppedElement)
-    this.setPosition(droppedElement, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff })
+    this.positioningService.setPosition(droppedElement, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff })
   }
   private multiDrop = (multiData, event) => {
     let i: number
@@ -121,10 +125,5 @@ export class MovementDirective {
         this.drop(id, event, xOffset, yOffset)
       }
     }
-  }
-
-  private setPosition(element, coord: { x, y }) {
-    element.setAttribute('cx', coord.x)
-    element.setAttribute('cy', coord.y)
   }
 }

@@ -54,10 +54,5 @@ export class CpanelComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
-  toggleMultiDrag = () => {
-    this.multiSelect.toggleMultiDrag()
-    document.getElementById('multi-drag')?.getAttribute('class')?.includes('active') ?
-    document.getElementById('multi-drag')?.setAttribute('class', 'btn btn-lg btn-outline-primary') :
-    document.getElementById('multi-drag')?.setAttribute('class', 'btn btn-lg btn-outline-primary active')
-  }
+  toggleMultiDrag = () => (this.multiSelect.toggleMultiDrag())
 }

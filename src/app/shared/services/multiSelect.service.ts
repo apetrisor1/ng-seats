@@ -50,5 +50,10 @@ export class MultiSelectService {
     text = text.slice(0, text.length - 1)
     this.setSelection(text)
   }
-  toggleMultiDrag = () => this.multiDragEvent.emit()
+  toggleMultiDrag = () => {
+    this.multiDragEvent.emit()
+    document.getElementById('multi-drag-toggle-button')?.getAttribute('class')?.includes('active') ?
+    document.getElementById('multi-drag-toggle-button')?.setAttribute('class', 'btn btn-lg btn-outline-primary') :
+    document.getElementById('multi-drag-toggle-button')?.setAttribute('class', 'btn btn-lg btn-outline-primary active')
+  }
 }
