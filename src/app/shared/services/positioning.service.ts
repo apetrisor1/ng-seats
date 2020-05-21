@@ -80,12 +80,33 @@ export class PositioningService {
     return matrix
   }
 
+  /*P, M and Q are three collinear points and PM = MQ.
+  Given P (x1, y1) and M (x2, y2), find out Q (x3, y3) as follows:
+  (x3 + x1) / 2 === x2 results in x3 = 2*x2 - x1
+  (y3 + y1) / 2 === y2 results in y3 = 2*y2 - y1
+  */
+  obtainThirdPointOnLine = ([x1, y1], [x2, y2]) => ({ x: (2 * x2) - x1, y: (2 * y2) - y1 })
+
+  /*P, M and Q are three collinear points and PM = MQ.
+  Given P (x1, y1) and Q (x2, y2), find out M (x3, y3) as follows:
+  x3 = x1 + x2 / 2
+  y3 = y1 + y2 / 2
+  */
+  obtainMiddlePointOnLine = ([x1, y1], [x2, y2]) => ({ x: (x1 + x2) / 2, y: (y1 + y2) / 2 })
+
   obtainTransformationMatrix = (degrees: number) => {
     const angleInRadians = this.getAngleInRadians(degrees)
     return new Matrix(
       [Math.cos(angleInRadians), -Math.sin(angleInRadians)],
       [Math.sin(angleInRadians), Math.cos(angleInRadians)]
     )
+  }
+
+  pointsAreCollinear = ([x1, y1], [x2, y2], [x3, y3]) => {
+    const slopeAB = Math.round(((y2 - y1) / (x2 - x1)) * 100) / 100
+    const slopeAC = Math.round((y3 - y1) / (x3 - x1) * 100) / 100
+
+    return (slopeAB === slopeAC)
   }
 
   setPosition(element, coord: { x, y }) {

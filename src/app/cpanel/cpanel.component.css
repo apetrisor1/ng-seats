@@ -11,12 +11,3 @@ p {
   padding: 0 1em 0 1em;
   cursor: pointer;
 }
-
-.rotate {
-  margin-top: 3em;
-}
-
-.wrapper {
-  position: relative;
-  top: -5em;
-}

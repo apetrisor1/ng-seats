@@ -42,14 +42,19 @@
 
 <!-- Admin panel -->
 <div class='wrapper'>
-    <p> Start dragging from the center of the top left seat</p>
+    <p> After adding seats above main area, drag from the top left seat. </p>
     <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add seating</button>
-    <div>
-      <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="toggleMultiDrag()">Multi drag</button>
-      <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="autoAlign()">Auto align</button>
-    </div>
     <button class="btn btn-lg btn-outline-primary" (click)="clearSelection()">Clear selection</button>
     <button class="btn btn-lg btn-outline-danger" (click)="deleteSelected()">Remove selection</button>
+    <p> Toggle between dragging one seat or entire selection. </p>
+    <div>
+      <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="toggleMultiDrag()">Multi drag</button>
+    </div>
+    <p> Beta: Auto-aligns multiple elements on one line. Use only on one line column or row. </p>
+    <div>
+      <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="autoAlign()">Auto align</button>
+    </div>
+    <p> Rotate selection of seats. Don't forget angle. </p>
     <div class="rotate">
       <span (click)="rotate(true)" class="arrow">&#8635;</span>
       <span (click)="rotate(false)" class="arrow">&#8634;</span>
