@@ -5,11 +5,6 @@ import { SVGService } from '.'
 /* Provides utility functions for:
 Rotate Directive
 Droppable Directive
-
-- Sets a new position for a SVG DOM element (a seat)
-- Gives pivot point of matrix (to rotate around)
-- Obtains the rotational transformation matrix for a given angle
-
 */
 
 @Injectable({

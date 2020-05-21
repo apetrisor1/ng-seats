@@ -5,6 +5,8 @@ import { DEFAULT_SECTOR } from '../CONSTANTS'
 
   C-Panel Component -> Area Component
 - The new seat group added by clicking 'Add seating'
+N.B.: Only related to the initial grouping above the main area, added by clicking "Add seating".
+Any main area selection information is handled in the multiSelect service.
 */
 
 @Injectable({
@@ -22,7 +24,7 @@ export class GroupingService {
 
   getCoords = () => ({ sector: this.sector, rows: this.rows, columns: this.columns })
   setCoords = (sector: string, rows: number, columns: number) => {
-    this.sector = sector
+    this.sector = sector ? sector : this.sector
     this.rows = Math.min(rows, 20)
     this.columns = Math.min(columns, 20)
     this.configurationChangedEvent.emit({ sector: this.sector, rows: this.rows, columns: this.columns })

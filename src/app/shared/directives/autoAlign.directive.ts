@@ -22,7 +22,11 @@ export class AutoAlignDirective {
     const text = this.multiSelect.getSelection()
     if (text) {
       const data = [...text.split('_')]
-      const seats = data.map(id => document.getElementById(id))
+      let seats: any[]
+      seats = data.map(id => document.getElementById(id))
+      seats = seats.sort((a, b) => (parseInt(a.attributes.cx.value, 10) - parseInt(b.attributes.cx.value, 10)))
+      seats = seats.sort((a, b) => (parseInt(a.attributes.cy.value, 10) - parseInt(b.attributes.cy.value, 10)))
+
       this.matrixBeforeAlign = this.positioningService.getAbsoluteCoordsMatrix(seats)
       this.seatsAsCoordinates = this.matrixBeforeAlign.columns()
 

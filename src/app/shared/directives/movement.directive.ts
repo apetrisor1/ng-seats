@@ -1,5 +1,6 @@
 import { Directive, HostListener } from '@angular/core'
 import { MultiSelectService, PositioningService, SVGService } from '../services'
+import { SEAT } from '../styles/svg.styles'
 
 /* ini  - Used in initial movement (new seats)  |  main - Used in main area (existing seats) */
 
@@ -78,13 +79,13 @@ export class MovementDirective {
   }
 
   @HostListener('mouseup', ['$event'])
-  onMouseUp(event): void {
+  onMouseUp(): void {
     this.draggingElement = null
     this.multiDraggingElements = []
   }
 
   @HostListener('mouseleave', ['$event'])
-  onMouseLeave(event): void {
+  onMouseLeave(): void {
     this.draggingElement = null
     this.multiDraggingElements = []
   }
