@@ -11,15 +11,17 @@ a) all seats are mapped with coordinates relative to the pivot. (middle of group
   ]
 b) Rotational transformation matrix is obtained for given angle
 c) Rotated coordinates matrix = a) * b)
-d) Set new coordinates of points, obtained as pivot point coordinates + new relative coordinates */
+d) Set new coordinates of points, obtained as pivot point coordinates + new relative coordinates 
+
+Matrix refers to the seat coordinates matrix, relative to the matrix pivot point.*/
 
 @Directive({
   selector: '[appRotate]'
 })
 export class RotateDirective {
   private pivotPoint = { x: 0, y: 0 }
-  private relativeSeatCoordsMatrixBeforeRotation: Matrix
-  private relativeSeatCoordsMatrixAfterRotation: Matrix
+  private matrixBeforeRotation: Matrix
+  private matrixAfterRotation: Matrix
 
   constructor(
     private multiSelect: MultiSelectService,
@@ -33,29 +35,19 @@ export class RotateDirective {
 
   private createInitialCoordsMatrix = (seats) => {
     this.pivotPoint = this.positioningService.getMatrixPivotPoint(seats)
-    seats.forEach(seat => {
-        const { cx, cy } = seat
-        this.relativeSeatCoordsMatrixBeforeRotation.rows[0].push(cx.baseVal.value - this.pivotPoint.x)
-        this.relativeSeatCoordsMatrixBeforeRotation.rows[1].push(cy.baseVal.value - this.pivotPoint.y)
-    })
+    this.matrixBeforeRotation = this.positioningService.getRelativeCoordsMatrix(seats)
   }
 
-  private createRotatedCoordsMatrix = (matrix1: Matrix, matrix2: Matrix) => {
-    matrix1.columns().forEach(seat => {
-      const rotatedX = (seat[0] * matrix2.rows[0][0]) + (seat[1] * matrix2.rows[0][1])
-      const rotatedY = (seat[0] * matrix2.rows[1][0]) + (seat[1] * matrix2.rows[1][1])
-
-      this.relativeSeatCoordsMatrixAfterRotation.rows[0].push(rotatedX)
-      this.relativeSeatCoordsMatrixAfterRotation.rows[1].push(rotatedY)
-    })
+  private createRotatedCoordsMatrix = (seatMatrix: Matrix, rotationMatrix: Matrix) => {
+    this.matrixAfterRotation = this.positioningService.multiply2x2Matrices(seatMatrix, rotationMatrix)
   }
 
   private initializeRotation = ({degrees, clockwise}) => {
     if (degrees < 0 || degrees > 360) { return }
     if (clockwise) { degrees = 360 - degrees }
 
-    this.relativeSeatCoordsMatrixBeforeRotation = new Matrix([], []) /* One array for X-coords, one for Y-coords */
-    this.relativeSeatCoordsMatrixAfterRotation = new Matrix([], [])
+    this.matrixBeforeRotation = new Matrix([], []) /* One array for X-coords, one for Y-coords */
+    this.matrixAfterRotation = new Matrix([], [])
 
     const text = this.multiSelect.getSelection()
     if (text) {
@@ -63,15 +55,15 @@ export class RotateDirective {
       const seats = data.map(id => document.getElementById(id))
       this.createInitialCoordsMatrix(seats)
       const transformationMatrix = this.positioningService.obtainTransformationMatrix(degrees)
-      this.createRotatedCoordsMatrix(this.relativeSeatCoordsMatrixBeforeRotation, transformationMatrix)
+      this.createRotatedCoordsMatrix(this.matrixBeforeRotation, transformationMatrix)
       this.rotateSeats(seats)
     }
   }
 
   private rotateSeats = (seats) => {
     for (let i = 0; i < seats.length; i++) {
-      const xRelativeToPivot = this.relativeSeatCoordsMatrixAfterRotation.columns()[i][0]
-      const yRelativeToPivot = this.relativeSeatCoordsMatrixAfterRotation.columns()[i][1]
+      const xRelativeToPivot = this.matrixAfterRotation.columns()[i][0]
+      const yRelativeToPivot = this.matrixAfterRotation.columns()[i][1]
 
       this.positioningService.setPosition(seats[i], {
         x: this.pivotPoint.x + xRelativeToPivot,

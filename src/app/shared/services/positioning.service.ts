@@ -19,17 +19,30 @@ export class PositioningService {
 
   constructor(private svgService: SVGService) { }
 
-  moveSVGElement = (event, element, xDiff = 0, yDiff = 0) => {
-    const svgPoint = this.svgService.getSVGPoint(event, element)
-    this.setPosition(element, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff})
-  }
-
-  setPosition(element, coord: { x, y }) {
-    element.setAttribute('cx', coord.x)
-    element.setAttribute('cy', coord.y)
-  }
-
   getAngleInRadians = (angleInDegrees: number) => ((angleInDegrees * Math.PI) / 180)
+
+  getRelativeCoordsMatrix = (seats) => {
+    const pivotPoint = this.getMatrixPivotPoint(seats)
+    const matrix = new Matrix([], [])
+    seats.forEach(seat => {
+        const { cx, cy } = seat
+        matrix.rows[0].push(cx.baseVal.value - pivotPoint.x)
+        matrix.rows[1].push(cy.baseVal.value - pivotPoint.y)
+    })
+
+    return matrix
+  }
+
+  getAbsoluteCoordsMatrix = (seats) => {
+    const matrix = new Matrix([], [])
+    seats.forEach(seat => {
+        const { cx, cy } = seat
+        matrix.rows[0].push(cx.baseVal.value)
+        matrix.rows[1].push(cy.baseVal.value)
+    })
+
+    return matrix
+  }
 
   getMatrixPivotPoint = (seats) => {
     let minX: any = seats[0].cx.baseVal.value
@@ -51,11 +64,32 @@ export class PositioningService {
     return { x: pivotX, y: pivotY }
   }
 
+  moveSVGElement = (event, element, xDiff = 0, yDiff = 0) => {
+    const svgPoint = this.svgService.getSVGPoint(event, element)
+    this.setPosition(element, { x: svgPoint.x + xDiff, y: svgPoint.y + yDiff})
+  }
+
+  multiply2x2Matrices = (matrix1: Matrix, matrix2: Matrix) => {
+    const matrix = new Matrix([], [])
+    matrix1.columns().forEach(seat => {
+      const rotatedX = (seat[0] * matrix2.rows[0][0]) + (seat[1] * matrix2.rows[0][1])
+      const rotatedY = (seat[0] * matrix2.rows[1][0]) + (seat[1] * matrix2.rows[1][1])
+      matrix.rows[0].push(rotatedX)
+      matrix.rows[1].push(rotatedY)
+    })
+    return matrix
+  }
+
   obtainTransformationMatrix = (degrees: number) => {
     const angleInRadians = this.getAngleInRadians(degrees)
     return new Matrix(
       [Math.cos(angleInRadians), -Math.sin(angleInRadians)],
       [Math.sin(angleInRadians), Math.cos(angleInRadians)]
     )
+  }
+
+  setPosition(element, coord: { x, y }) {
+    element.setAttribute('cx', coord.x)
+    element.setAttribute('cy', coord.y)
   }
 }

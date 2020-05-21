@@ -44,11 +44,12 @@
 <div class='wrapper'>
     <p> Start dragging from the center of the top left seat</p>
     <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add seating</button>
-    <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="toggleMultiDrag()">Multi drag</button>
-    <button class="btn btn-lg btn-outline-primary" (click)="clearSelection()">Clear selection</button>
     <div>
-      <button class="btn btn-lg btn-outline-danger" (click)="deleteSelected()">Remove selection</button>
+      <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="toggleMultiDrag()">Multi drag</button>
+      <button id="multi-drag-toggle-button" class="btn btn-lg btn-outline-primary" (click)="autoAlign()">Auto align</button>
     </div>
+    <button class="btn btn-lg btn-outline-primary" (click)="clearSelection()">Clear selection</button>
+    <button class="btn btn-lg btn-outline-danger" (click)="deleteSelected()">Remove selection</button>
     <div class="rotate">
       <span (click)="rotate(true)" class="arrow">&#8635;</span>
       <span (click)="rotate(false)" class="arrow">&#8634;</span>

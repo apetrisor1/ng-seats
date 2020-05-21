@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { GroupingService, MultiSelectService, RotateService } from '../shared/services'
+import { AutoAlignService, GroupingService, MultiSelectService, RotateService } from '../shared/services'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
@@ -14,6 +14,7 @@ export class CpanelComponent implements OnInit {
   sector
 
   constructor(
+    private autoAlignService: AutoAlignService,
     private grouping: GroupingService,
     private modalService: NgbModal,
     private multiSelect: MultiSelectService,
@@ -26,6 +27,8 @@ export class CpanelComponent implements OnInit {
   myForm: FormGroup
 
   ngOnInit(): void {}
+
+  autoAlign = () => this.autoAlignService.autoAlign()
 
   clearSelection = () => this.multiSelect.clearSelection()
   deleteSelected = () => this.multiSelect.deleteSelected()
