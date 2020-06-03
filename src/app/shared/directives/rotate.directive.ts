@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core'
 import { MultiSelectService, PositioningService, RotateService } from '../services'
-import { Matrix } from '../classes/matrix'
+import { Matrix } from '../classes/Matrix'
 
 /* Directive applied to any group of seats in the main area, if selected.
 Rotates one or more seats:

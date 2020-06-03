@@ -1,0 +1,42 @@
+<div class="content">
+  <!-- Login Form -->
+  <form class="form" [formGroup]="loginForm">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput
+      [formControl]="emailFormControl"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. pat@example.com">
+      <mat-error class="soft-error" *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>Password</mat-label>
+      <input matInput 
+      class = "password"
+      [formControl] = "passwordCtrl"
+      type = "password"
+      (keyup.enter)="(usernameCtrl.valid && passwordCtrl.valid) && login()"
+      required>
+      <!-- Password error -->
+      <mat-error *ngIf="passwordCtrl.invalid && passwordCtrl.touched">Password is required</mat-error>
+    </mat-form-field>
+
+    <!-- Submit button -->
+    <div class="button-holder">
+        <button
+        *ngIf="emailFormControl.valid && passwordCtrl.valid"
+        class="btn btn-success"
+        matTooltip="Info about the action" 
+        (click)="login()" 
+        >Login</button>
+    </div>
+    <p style="font-size: 0.5em; text-align: center; color:red;" *ngIf="wrongCredentials">Invalid Username/Password</p>
+  </form>
+</div>

@@ -1,6 +1,5 @@
 import { Directive, HostListener } from '@angular/core'
 import { MultiSelectService, PositioningService, SVGService } from '../services'
-import { SEAT } from '../styles/svg.styles'
 
 /* ini  - Used in initial movement (new seats)  |  main - Used in main area (existing seats) */
 

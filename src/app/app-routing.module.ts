@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { AreaComponent } from './area/area.component'
-import { CpanelComponent } from './cpanel/cpanel.component'
+import { ConfigurationComponent } from './configuration/configuration.component'
+import { LoginComponent } from './login/login.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'area', component: AreaComponent },
-  { path: 'cpanel', component: CpanelComponent }
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'configuration', component: ConfigurationComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full'},
+
 ]
 
 @NgModule({

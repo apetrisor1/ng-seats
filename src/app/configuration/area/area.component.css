@@ -24,3 +24,11 @@ ul {
   list-style-type: none;
   display: flex;
 }
+
+.circle {
+  border: 1px solid red;
+}
+
+.row {
+  margin: 5px;
+}

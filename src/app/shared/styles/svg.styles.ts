@@ -1,8 +1,11 @@
 const SEAT = {
-  svgHeight: 30,
-  svgWidth: 30,
+  svgHeight: 15,
+  svgWidth: 20,
   svgFill: '#1976d2',
-  svgFillSelected: '#0f355c'
+  svgFillSelected: '#0f355c',
+  svgSeatX: 7.5,
+  svgSeatY: 7.5,
+  svgSeatRadius: 7.5
 }
 
 export {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
-import { Matrix } from '../classes/matrix'
+import { Matrix } from '../classes/Matrix'
 import { SVGService } from '.'
 
 /* Provides utility functions for:
 Rotate Directive
-Droppable Directive
+Movement Directive
 */
 
 @Injectable({

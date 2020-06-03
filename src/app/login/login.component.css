@@ -1,0 +1,46 @@
+.content {
+    margin-top: 10vh;
+}
+
+.mat-input-element {
+    font-size: 1.5em;
+    color: #14679e;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 0 auto;
+}
+
+mat-label {
+    padding: 1.9em;
+}
+
+input, .password {
+    padding: 1.25em;
+    border: 1px solid #cacaca;
+}
+
+mat-form-field {
+    margin-top: 4vh;
+}
+
+mat-error {
+    color: #14679e;
+    font-size: 0.8em;
+}
+
+.soft-error {
+    color: #14679e;
+}
+
+/* submit button */
+.button-holder {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 5vh;
+    font-size: 1.2em;
+}
+

@@ -7,11 +7,11 @@ C-Panel Component -> MultiSelect Directive
 - user cleared selection
 - user deleted selection
 
-C-Panel Component -> Droppable Directive:
+C-Panel Component -> Movement Directive:
 - user deleted selection
 - whether the user can select multiple seats by mouse-drag
 
-MultiSelect Directive -> Droppable Directive:
+MultiSelect Directive -> Movement Directive:
 - current selection of seats to be dragged. (acts as the "text" property on event.dataTransfer in draggable.directive.ts)
 */
 

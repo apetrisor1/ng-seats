@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core'
 import { AutoAlignService, MultiSelectService, PositioningService, RotateService } from '../services'
-import { Matrix } from '../classes/matrix'
+import { Matrix } from '../classes/Matrix'
 
 @Directive({
   selector: '[appAutoAlign]'

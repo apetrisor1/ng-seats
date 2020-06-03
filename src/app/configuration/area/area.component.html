@@ -3,7 +3,7 @@
   <div id='dragon' appInitiateMovement class='seat'>
     <p class='row' *ngFor='let row of circleRows'>
       <svg class='small-keeper' [attr.height]='svgHeight' [attr.width]='svgWidth' *ngFor='let column of circleColumns'>
-        <circle class='circle' id={{sector}}-{{row}}-{{column}}-{{now}} cx='12.5' cy='20' r='7.5' [attr.fill]='svgFill'/>
+        <circle class='circle' id={{sector}}-{{row}}-{{column}}-{{now}} [attr.cx]='svgSeatX' [attr.cy]='svgSeatY' [attr.r]='svgSeatRadius' [attr.fill]='svgFill'/>
       </svg>
     </p>
   </div>

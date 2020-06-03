@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core'
-import { GroupingService } from '../shared/services/grouping.service'
-import { SEAT } from '../shared/styles/svg.styles'
+import { GroupingService } from '../../shared/services/grouping.service'
+import { SEAT } from '../../shared/styles/svg.styles'
 
 @Component({
   selector: 'app-area',
   templateUrl: './area.component.html',
-  styleUrls: ['./area.component.css', '../app.component.css']
+  styleUrls: ['./area.component.css']
 })
 export class AreaComponent implements OnInit {
-  sector
   circleColumns   = new Array()
   circleRows      = new Array()
-  svgHeight       = SEAT.svgHeight
-  svgWidth        = SEAT.svgWidth
-  svgFill         = SEAT.svgFill
-
   now = new Date().getTime()
+  sector
+  svgHeight       = SEAT.svgHeight
+  svgFill         = SEAT.svgFill
+  svgSeatX        = SEAT.svgSeatX
+  svgSeatY        = SEAT.svgSeatY
+  svgSeatRadius   = SEAT.svgSeatRadius
+  svgWidth        = SEAT.svgWidth  /* distance between neighbouring seats (cols) */
+  /*Style attribute "margin" for <p> elements of class "row" controls distance between seat rows.*/
 
   constructor(private grouping: GroupingService) {
     const configuration = this.grouping.getCoords()

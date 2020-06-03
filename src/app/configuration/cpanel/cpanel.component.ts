@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core'
-import { AutoAlignService, GroupingService, MultiSelectService, RotateService } from '../shared/services'
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
+import { AutoAlignService, GroupingService, MultiSelectService, RotateService } from '../../shared/services'
+import { FormGroup, FormBuilder } from '@angular/forms'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-cpanel',
   templateUrl: './cpanel.component.html',
-  styleUrls: ['./cpanel.component.css', '../app.component.css']
+  styleUrls: ['./cpanel.component.css']
 })
 export class CpanelComponent implements OnInit {
   degreesInput

@@ -2,10 +2,15 @@ import { AppRoutingModule } from './app-routing.module'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgModule } from '@angular/core'
+import { HttpClientModule } from '@angular/common/http'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component'
-import { AreaComponent } from './area/area.component'
-import { CpanelComponent } from './cpanel/cpanel.component'
+import { AreaComponent } from './configuration/area/area.component'
+import { ConfigurationComponent } from './configuration/configuration.component'
+import { CpanelComponent } from './configuration/cpanel/cpanel.component'
 
 import {
   AutoAlignDirective,
@@ -16,33 +21,43 @@ import {
 } from './shared/directives'
 import {
   AutoAlignService,
+  LoginService,
   GroupingService,
   SVGService,
   MultiSelectService,
   PositioningService,
   RotateService
 } from './shared/services'
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
+  exports: [
+    BrowserAnimationsModule
+  ],
   declarations: [
     AppComponent,
     AreaComponent,
+    ConfigurationComponent,
     CpanelComponent,
+    LoginComponent,
     AutoAlignDirective,
     InitiateMovementDirective,
     MovementDirective,
     RotateDirective,
-    MultiSelectDirective,
-    AutoAlignDirective
+    MultiSelectDirective
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     AutoAlignService,
+    LoginService,
     GroupingService,
     MultiSelectService,
     PositioningService,
