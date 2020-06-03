@@ -22,7 +22,7 @@
       class = "password"
       [formControl] = "passwordCtrl"
       type = "password"
-      (keyup.enter)="(usernameCtrl.valid && passwordCtrl.valid) && login()"
+      (keyup.enter)="(emailFormControl.valid && passwordCtrl.valid) && login()"
       required>
       <!-- Password error -->
       <mat-error *ngIf="passwordCtrl.invalid && passwordCtrl.touched">Password is required</mat-error>
