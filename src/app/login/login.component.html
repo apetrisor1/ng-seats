@@ -11,7 +11,7 @@
         Please enter a valid email address
       </mat-error>
       <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
+        Email is <strong> required </strong>
       </mat-error>
     </mat-form-field>
 
@@ -22,21 +22,20 @@
       class = "password"
       [formControl] = "passwordCtrl"
       type = "password"
-      (keyup.enter)="(emailFormControl.valid && passwordCtrl.valid) && login()"
       required>
       <!-- Password error -->
-      <mat-error *ngIf="passwordCtrl.invalid && passwordCtrl.touched">Password is required</mat-error>
+      <mat-error *ngIf="passwordCtrl.invalid && passwordCtrl.touched"> Password is required </mat-error>
     </mat-form-field>
 
     <!-- Submit button -->
     <div class="button-holder">
-        <button
-        *ngIf="emailFormControl.valid && passwordCtrl.valid"
-        class="btn btn-success"
-        matTooltip="Info about the action" 
-        (click)="login()" 
-        >Login</button>
+      <button
+      *ngIf="emailFormControl.valid && passwordCtrl.valid"
+      class="btn btn-success"
+      matTooltip="Info about the action" 
+      (click)="loginForm.valid && login()" 
+      >Login</button>
     </div>
-    <p style="font-size: 0.5em; text-align: center; color:red;" *ngIf="wrongCredentials">Invalid Username/Password</p>
+    <p style="font-size: 0.5em; text-align: center; color:red;" *ngIf="wrongCredentials"> Invalid Username/Password </p>
   </form>
 </div>
