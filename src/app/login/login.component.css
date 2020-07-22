@@ -1,46 +1,54 @@
+/* submit button */
+.button-holder {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 5vh;
+  font-size: 1.2em;
+}
+
 .content {
-    margin-top: 10vh;
+  margin-top: 10vh;
 }
 
-.mat-input-element {
-    font-size: 1.5em;
-    color: #14679e;
-}
 .form {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    margin: 0 auto;
-}
-
-mat-label {
-    padding: 1.9em;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 0 auto;
+  padding: 0 1em 0 1em;
 }
 
 input, .password {
-    padding: 1.25em;
-    border: 1px solid #cacaca;
+  padding: 1.25em;
+  border: 1px solid #cacaca;
+}
+
+.login {
+  padding: 2em 0 0 0;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.mat-input-element {
+  font-size: 1.5em;
+  color: #14679e;
 }
 
 mat-form-field {
-    margin-top: 4vh;
+  margin-top: 4vh;
+}
+
+mat-label {
+  padding: 1.9em;
 }
 
 mat-error {
-    color: #14679e;
-    font-size: 0.8em;
+  color: #14679e;
+  font-size: 0.8em;
 }
 
 .soft-error {
-    color: #14679e;
+  color: #14679e;
 }
-
-/* submit button */
-.button-holder {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-top: 5vh;
-    font-size: 1.2em;
-}
-

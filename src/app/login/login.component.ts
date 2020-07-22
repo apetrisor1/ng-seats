@@ -54,22 +54,23 @@ export class LoginComponent implements OnInit {
     this.submitted = true
     this.credentials.Email = this.loginForm.value.email
     this.credentials.Password = this.loginForm.value.password
-    console.log('credentials object', this.credentials)
 
     // Perform login
-    // this.loginService.login(this.credentials).subscribe(data => {
+    this.loginService.login(this.credentials).subscribe(data => {
+      if (data) {
+        console.log('login data', data)
+        this.success = true
+         // Save response to local storage
+        // localStorage.setItem('user_info', JSON.stringify(data))
+        // this.router.navigate(['configuration'])
+      }
+    }, (err) => {
+      console.log('err')
+      console.log(err)
 
-    //   if (data) {
-    //     console.log('login data', data)
-    //     this.success = true
-    //      // Save response to local storage
-    //     localStorage.setItem('user_info', JSON.stringify(data))
-    //     this.router.navigate(['Home/Index'])
-    //   } else {
-    //     this.success = false
-    //     this.wrongCredentials = true
-    //   }
-    // })
+      this.success = false
+      this.wrongCredentials = true
+    })
 
   }
 }
