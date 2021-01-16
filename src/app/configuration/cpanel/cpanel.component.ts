@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { AutoAlignService, GroupingService, MultiSelectService, RotateService } from '../../shared/services'
+import { AutoAlignService, GroupingService, MultiSelectService, PersistenceService, RotateService } from '../../shared/services'
+import { extractTargetIdFromURL } from '../util'
 import { FormGroup, FormBuilder } from '@angular/forms'
-
+import { Router } from '@angular/router'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
@@ -18,7 +19,9 @@ export class CpanelComponent implements OnInit {
     private grouping: GroupingService,
     private modalService: NgbModal,
     private multiSelect: MultiSelectService,
+    private persistenceService: PersistenceService,
     private rotateService: RotateService,
+    private router: Router,
     private formBuilder: FormBuilder
   ) {
     this.sector = this.grouping.getCoords().sector
@@ -55,6 +58,25 @@ export class CpanelComponent implements OnInit {
     const { sector, rows, columns } = filledOutForm?.value
     this.grouping.setCoords(sector, rows, columns)
     this.modalService.dismissAll()
+  }
+
+  save() {
+    this.persistenceService.saveConfiguration(
+      extractTargetIdFromURL(this.router)
+    ).subscribe(data => {
+      console.log('Configuration saved!', data)
+    }, (err) => {
+      console.log('Error when saving configuration', err)
+    })
+  }
+
+  back() {
+    this.router.navigate(['home'])
+  }
+
+  saveAndBack() {
+    this.save()
+    this.back()
   }
 
   toggleMultiDrag = () => (this.multiSelect.toggleMultiDrag())

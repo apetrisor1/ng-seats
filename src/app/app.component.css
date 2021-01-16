@@ -8,17 +8,28 @@
 }
 .face {
   position: relative;
-  top: 72px;
-  left: -50px;
+  top: 5em;
+  left: -4em;
 }
 
 p {
   margin: 0;
 }
 
+#logout {
+  cursor: pointer;
+  padding: 4em;
+}
+
+#title {
+  position: absolute;
+  left: 5em;
+}
+
 .toolbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: 40px;
   position: absolute;
   top: 0;

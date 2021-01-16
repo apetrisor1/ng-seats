@@ -1,0 +1,11 @@
+<div id="home_wrapper">
+  <div class="new">
+    <p (click)="new()">Create a new configuration</p>
+  </div>
+  <hr>
+  <div class="existing">
+    <p>... or select from below</p>
+    <p (click)="navigateToConfiguration(item)" class="li" *ngFor="let item of configurations">{{item._id}}</p>
+  </div>
+  
+</div>

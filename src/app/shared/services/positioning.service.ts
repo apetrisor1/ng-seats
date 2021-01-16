@@ -67,10 +67,10 @@ export class PositioningService {
   multiply2x2Matrices = (matrix1: Matrix, matrix2: Matrix) => {
     const matrix = new Matrix([], [])
     matrix1.columns().forEach(seat => {
-      const rotatedX = (seat[0] * matrix2.rows[0][0]) + (seat[1] * matrix2.rows[0][1])
-      const rotatedY = (seat[0] * matrix2.rows[1][0]) + (seat[1] * matrix2.rows[1][1])
-      matrix.rows[0].push(rotatedX)
-      matrix.rows[1].push(rotatedY)
+      const newX = (seat[0] * matrix2.rows[0][0]) + (seat[1] * matrix2.rows[0][1])
+      const newY = (seat[0] * matrix2.rows[1][0]) + (seat[1] * matrix2.rows[1][1])
+      matrix.rows[0].push(newX)
+      matrix.rows[1].push(newY)
     })
     return matrix
   }

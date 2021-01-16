@@ -3,14 +3,14 @@
   <div id='dragon' appInitiateMovement class='seat'>
     <p class='row' *ngFor='let row of circleRows'>
       <svg class='small-keeper' [attr.height]='svgHeight' [attr.width]='svgWidth' *ngFor='let column of circleColumns'>
-        <circle class='circle' id={{sector}}-{{row}}-{{column}}-{{now}} [attr.cx]='svgSeatX' [attr.cy]='svgSeatY' [attr.r]='svgSeatRadius' [attr.fill]='svgFill'/>
+        <circle class={{seatClassName}} id={{sector}}-{{row}}-{{column}}-{{now}} [attr.cx]='svgSeatX' [attr.cy]='svgSeatY' [attr.r]='svgSeatRadius' [attr.fill]='svgFill'/>
       </svg>
     </p>
   </div>
 </div>
 
 <!-- Seat configuration drop area -->
-<div class='svg-container' appAutoAlign appMovement appMultiSelect appRotate>
+<div id='svg-container' appAutoAlign appMovement appMultiSelect appRotate>
   <svg id='dropzone' height='100%' width='100%'>
   </svg>
 </div>

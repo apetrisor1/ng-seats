@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
+    this.checkExistingUser()
     this.submitted = false
     this.success = false
     this.wrongCredentials = false
@@ -52,25 +53,25 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.submitted = true
-    this.credentials.Email = this.loginForm.value.email
-    this.credentials.Password = this.loginForm.value.password
+    this.credentials.email = this.loginForm.value.email
+    this.credentials.password = this.loginForm.value.password
 
-    // Perform login
     this.loginService.login(this.credentials).subscribe(data => {
       if (data) {
-        console.log('login data', data)
         this.success = true
-         // Save response to local storage
-        // localStorage.setItem('user_info', JSON.stringify(data))
-        // this.router.navigate(['configuration'])
+        localStorage.setItem('user_info', JSON.stringify(data))
+        this.router.navigate(['home'])
       }
     }, (err) => {
-      console.log('err')
-      console.log(err)
-
       this.success = false
       this.wrongCredentials = true
     })
+  }
 
+  private checkExistingUser() {
+    const localUser = localStorage.getItem('user_info')
+    if (localUser) {
+      this.router.navigate(['home'])
+    }
   }
 }

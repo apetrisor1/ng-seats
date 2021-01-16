@@ -48,6 +48,11 @@ export class MultiSelectDirective {
     const seats = target.getElementsByClassName('circle')
     this.colourSeats(seats, this.start, this.end)
 
+    console.log({
+      seats,
+      len: seats.length
+    })
+
     /* Seats are coloured based on mouse selection, then this.seats is emptied, in this.colourSeats().
     Last, this.seats is filled again based on color in multiSelect.selectColouredSeats().
     This is done to avoid byzantine logic when doing repeated selections, around pushing/removing elements in this.seats. */

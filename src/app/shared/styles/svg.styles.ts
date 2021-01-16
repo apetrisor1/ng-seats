@@ -1,4 +1,10 @@
+const CANVAS = {
+  svgHeight: '40em',
+  svgWidth: '40em'
+}
+
 const SEAT = {
+  htmlClassName: 'circle user-owned',
   svgHeight: 15,
   svgWidth: 20,
   svgFill: '#1976d2',
@@ -8,6 +14,10 @@ const SEAT = {
   svgSeatRadius: 7.5
 }
 
+const SVGXMLNamespace = 'http://www.w3.org/2000/svg'
+
 export {
-  SEAT
+  CANVAS,
+  SEAT,
+  SVGXMLNamespace
 }

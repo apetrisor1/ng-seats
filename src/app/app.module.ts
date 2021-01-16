@@ -11,6 +11,8 @@ import { AppComponent } from './app.component'
 import { AreaComponent } from './configuration/area/area.component'
 import { ConfigurationComponent } from './configuration/configuration.component'
 import { CpanelComponent } from './configuration/cpanel/cpanel.component'
+import { HomeComponent } from './home/home.component'
+import { LoginComponent } from './login/login.component'
 
 import {
   AutoAlignDirective,
@@ -29,7 +31,7 @@ import {
   PositioningService,
   RotateService
 } from './shared/services'
-import { LoginComponent } from './login/login.component'
+
 
 @NgModule({
   exports: [
@@ -41,6 +43,7 @@ import { LoginComponent } from './login/login.component'
     ConfigurationComponent,
     CpanelComponent,
     LoginComponent,
+    HomeComponent,
     AutoAlignDirective,
     InitiateMovementDirective,
     MovementDirective,

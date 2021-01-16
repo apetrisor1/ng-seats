@@ -1,8 +1,6 @@
-.svg-container {
+#svg-container {
   background-color: #cacaca;
   border: 3px dashed #000;
-  height: 35em;
-  width: 50em;
 }
 
 .seating {

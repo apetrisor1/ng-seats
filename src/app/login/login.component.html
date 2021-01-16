@@ -37,6 +37,6 @@
       (click)="loginForm.valid && login()" 
       >Login</button>
     </div>
-    <p style="font-size: 0.5em; text-align: center; color:red;" *ngIf="wrongCredentials"> Invalid Username/Password </p>
+    <p class="hard-error" *ngIf="wrongCredentials"> Invalid Username/Password </p>
   </form>
 </div>

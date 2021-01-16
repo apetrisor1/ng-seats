@@ -3,6 +3,7 @@ import { GroupingService } from './grouping.service'
 import { InterceptService } from './customHttpInterceptor.service'
 import { LoginService } from './login.service'
 import { MultiSelectService } from './multiSelect.service'
+import { PersistenceService } from './persistence.service'
 import { PositioningService } from './positioning.service'
 import { RotateService } from './rotate.service'
 import { SVGService } from './svgservice.service'
@@ -13,6 +14,7 @@ export {
     InterceptService,
     LoginService,
     MultiSelectService,
+    PersistenceService,
     PositioningService,
     RotateService,
     SVGService

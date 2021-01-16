@@ -1,0 +1,14 @@
+.li, .new {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#home_wrapper {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+p {
+  margin: 1em 0 1em 0;
+}
