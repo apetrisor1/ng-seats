@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { GET_VENUES, POST_VENUE, PUT_VENUE } from '../BACKEND_API'
+import { GET_VENUES, POST_VENUE, PUT_VENUE, GET_USERS } from '../BACKEND_API'
 import { VenueConfigurations } from '../classes/VenueConfigurations'
 import { Observable } from 'rxjs'
 
@@ -17,7 +17,7 @@ export class PersistenceService {
   }
 
   getConfigurations(): Observable<any> {
-    return this.httpClient.get(GET_VENUES)
+    return this.httpClient.get(`${GET_USERS}/me${GET_VENUES}`)
   }
 
   saveConfiguration(currentId?: string): Observable<any> {
