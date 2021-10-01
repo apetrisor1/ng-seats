@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { GroupingService, PersistenceService } from '../../shared/services'
 import { CANVAS, SEAT, SVGXMLNamespace } from '../../shared/styles/svg.styles'
-import { VenueConfigurations } from '../../shared/classes/VenueConfigurations'
+import { VenueConfigurations, IVenueSeat } from '../../shared/classes/VenueConfigurations'
 
 @Component({
   selector: 'app-area',
@@ -37,8 +37,8 @@ export class AreaComponent implements OnInit {
     })
 
     this.persistenceService.configurationReadyForDisplay.subscribe((configuration: VenueConfigurations) => {
-      this.setCanvasSize(configuration.canvasHeight, configuration.canvasWidth)
-      this.createSVGSeats(configuration.seatCoords)
+      this.setCanvasSize(configuration.canvas_height, configuration.canvas_width)
+      this.createSVGSeats(configuration.seats)
     })
   }
 
@@ -50,17 +50,17 @@ export class AreaComponent implements OnInit {
     }
   }
 
-  private createSVGSeats(seatCoords: (string | undefined)[][]): void {
+  private createSVGSeats(seatCoords: IVenueSeat[]): void {
     this.clearCanvas()
     const len = seatCoords?.length
     for (let i = len - 1; i >= 0; i --) {
-      const [elementId = '', cx = '', cy = ''] = seatCoords[i]
+      const { id, lon: cx, lat: cy } = seatCoords[i]
       const seat: any = document.createElementNS(SVGXMLNamespace, 'circle')
       seat.setAttribute('class', this.seatClassName)
       seat.setAttribute('cx', cx)
       seat.setAttribute('cy', cy)
       seat.setAttribute('draggable', true)
-      seat.setAttribute('id', elementId)
+      seat.setAttribute('id', id)
       seat.setAttribute('r', this.svgSeatRadius.toString())
       seat.setAttribute('fill', this.svgFill )
       const dropzone = document.getElementById('dropzone')

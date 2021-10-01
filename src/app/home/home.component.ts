@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     })
   }
   navigateToConfiguration(config) {
-    this.router.navigate([`configuration/${config._id}`])
+    this.router.navigate([`configuration/${config.id}`])
   }
   new(): void {
     this.router.navigate(['configuration'])

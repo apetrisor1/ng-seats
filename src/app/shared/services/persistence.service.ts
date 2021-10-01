@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { GET_VENUES, POST_VENUE, PUT_VENUE, GET_USERS } from '../BACKEND_API'
-import { VenueConfigurations } from '../classes/VenueConfigurations'
+import { VenueConfigurations, IVenueSeat } from '../classes/VenueConfigurations'
 import { Observable } from 'rxjs'
 
 @Injectable({
@@ -22,9 +22,9 @@ export class PersistenceService {
 
   saveConfiguration(currentId?: string): Observable<any> {
     const canvas: HTMLElement|null = document.getElementById('svg-container')
-    this.venueConfiguration.canvasHeight = canvas?.style.height
-    this.venueConfiguration.canvasWidth = canvas?.style.width
-    this.venueConfiguration.seatCoords = this.getCoordinatesForAllSeatsOnCanvas()
+    this.venueConfiguration.canvas_height = canvas?.style.height
+    this.venueConfiguration.canvas_width = canvas?.style.width
+    this.venueConfiguration.seats = this.getCoordinatesForAllSeatsOnCanvas()
 
     if (currentId) {
       return this.httpClient.put(`${PUT_VENUE}/${currentId}`, this.venueConfiguration)
@@ -33,12 +33,13 @@ export class PersistenceService {
     }
   }
 
-  private getCoordinatesForAllSeatsOnCanvas(): (string|undefined)[][] {
+  private getCoordinatesForAllSeatsOnCanvas(): any {
     return Array.from(document.getElementsByClassName('circle')).map(seat => {
       const seatX = seat.attributes.getNamedItem('cx')?.value
       const seatY = seat.attributes.getNamedItem('cy')?.value
+      // const seatId = seat.attributes.getNamedItem('id')?.value
 
-      return [seat.id, seatX, seatY]
+      return [seatX, seatY]
     })
   }
 

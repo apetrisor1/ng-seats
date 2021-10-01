@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "seats": {
+    "Seats": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -121,7 +121,7 @@
       }
     }
   },
-  "defaultProject": "seats",
+  "defaultProject": "Seats",
   "cli": {
     "analytics": "2f1a9744-8900-4634-83d6-4b40c37eff81"
   }
